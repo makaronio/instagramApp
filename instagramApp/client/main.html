@@ -3,16 +3,18 @@
 </head>
 <body>
     <div class="container">
-        <header class="navbar">
-            <div class="navbar-inner">
-                <a class="brand" href="/">Microscope</a>
-            </div>
-        </header>
-        <div id="main" class="row-fluid">
-            {{> postsList}}
+        <div>
+            <label>Hide checked</label>
+            <input class="show-checked" type="checkbox">
         </div>
         <div>
-            {{> photos}}
+            <form id="add-message">
+                <label>Add new message</label>
+                <input type="text">
+            </form>
+        </div>
+        <div id="message-container">
+            {{> messagesList}}
         </div>
     </div>
 </body>

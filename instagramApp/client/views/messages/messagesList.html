@@ -1,0 +1,14 @@
+<template name="messagesList">
+    {{#each messages}}
+        <div>
+            <label>{{name}}</label>
+
+            {{#if checked}}
+                <input class="toggle-checked" type="checkbox" checked>
+            {{else}}
+                <input class="toggle-checked" type="checkbox">
+            {{/if}}
+            <button class="delete-message">del</button>
+        </div>
+    {{/each}}
+</template>

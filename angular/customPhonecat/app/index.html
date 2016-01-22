@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="http://angular.github.io/angular-phonecat/step-0/app/bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="http://angular.github.io/angular-phonecat/step-0/app/bower_components/angular/angular.js"></script>
+    <script src="http://angular.github.io/angular-phonecat/step-7/app/bower_components/angular-route/angular-route.js"></script>
 
     <script src="js/controllers.js"></script>
 
@@ -36,13 +37,18 @@
                 <!--Body content-->
 
                 <ul class="phones">
-                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-                        {{phone.name}}
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+                        <a href="#/phones/{{phone.id}}" class="thumb">
+                            <img ng-src="{{phone.imageUrl}}" alt="{{phone.name}}">
+                        </a>
+                        <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
                         <p>{{phone.snippet}}</p>
                     </li>
                 </ul>
 
             </div>
+
+            <pre>{{phones | filter:query | orderBy:orderProp | json}}</pre>
         </div>
     </div>
 

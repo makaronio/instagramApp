@@ -1,0 +1,12 @@
+{
+  "name": "phonecat",
+  "description": "",
+  "main": "index.js",
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-route": "1.4.x"
+  }
+}

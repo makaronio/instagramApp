@@ -76,11 +76,14 @@
                             <div class="modal-body">
                                 <label>Description</label>
                                 <input type="text" ng-model="newPhoto.description">
+
                                 <input type="file"
                                        name="testPhoto"
-                                       ng-model="newPhoto.file"
                                        accept="image/*"
+                                       class="myFileInput"
+                                       custom-on-change="uploadFile"
                                 >
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -96,24 +99,19 @@
             </div>
 
 
-
-
-
         </div>
         <!-- /.row -->
 
         <!-- Page Features -->
         <div class="row text-center" ng-controller="photoListCtrl">
-
             <div class="col-md-3 col-sm-6 hero-feature" ng-repeat="photo in photos">
                 <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
+                    <img ng-src="{{photo.imageURL}}">
                     <div class="caption">
                         <h4>{{photo.description}}</h4>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /.row -->
 

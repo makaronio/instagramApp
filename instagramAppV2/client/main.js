@@ -3,6 +3,7 @@
 
 var app = angular.module('instagramAppV2', ['angular-meteor']);
 
+//  todo.howItWorks
 app.directive('customOnChange', function() {
     return {
         restrict: 'A',
@@ -12,6 +13,7 @@ app.directive('customOnChange', function() {
         }
     };
 });
+
 
 app.controller('photoListCtrl', ['$scope', '$meteor', function($scope, $meteor) {
 
@@ -34,7 +36,8 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
 
 
     $scope.addPhoto = function() {
-        var file = $scope.newPhoto.inputFile;
+
+        var uri = "https://scontent-frt3-1.cdninstagram.com/hphotos-xfa1/t51.2885-19/10706773_293591184165151_1457379156_a.jpg";
 
         $scope.photos.push( {
             description: $scope.newPhoto.description,
@@ -42,24 +45,42 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
             createdAt: new Date()
         });
 
-        $scope.newPhoto = {
-            description: "",
-            imageURL: "",
-            inputFile: {}
-        };
-    };
+        /**
+        setTimeout(function() {
+            $scope.photos.forEach(function (obj, i, list) {
+                console.log(obj.description);
 
-    $scope.uploadFile = function(e) {
-        var files = e.target.files;
-        var file = $scope.newPhoto.inputFile = files[0];
+                if (obj.description === $scope.newPhoto.description) {
+                    obj.imageURL = uri;
+                }
+            });
+            $scope.photos.save();
+        }, 1000);
+         */
+
+
+        var file = $(".myFileInput")[0].files[0];
 
         Images.insert(file, function (err, fileObj) {
             if (err) {
                 // handle error
             } else {
-                $scope.newPhoto.imageURL = "/cfs/files/images/" + fileObj._id;
+                $scope.photos.forEach(function (obj) {
+                    console.log(obj.description);
+
+                    if (obj.description === $scope.newPhoto.description) {
+                        obj.imageURL = "/cfs/files/images/" + fileObj._id;
+                    }
+                });
+                $scope.photos.save();
             }
         });
+
+    };
+
+    $scope.uploadFile = function(e) {
+        var files = e.target.files;
+        $scope.newPhoto.inputFile = files[0];
     }
 
 }]);

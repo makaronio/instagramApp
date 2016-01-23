@@ -13,21 +13,25 @@ app.controller('photoListCtrl', ['$scope', '$meteor', function($scope, $meteor) 
 
 
 app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $meteor) {
-    $scope.headerText = "Photos";
-
-    $scope.newPhoto = {
-        description: ""
-    };
-
-
 
     //  todo.bug: different contexts
     $scope.photos = $meteor.collection(Photos);
 
+    $scope.headerText = "Photos";
+
+    $scope.newPhoto = {
+        description: "",
+        file: {}
+    };
+
+
     $scope.addPhoto = function() {
+        debugger;
         $scope.photos.push( {
             description: $scope.newPhoto.description,
+            file: $scope.newPhoto.file,
             createdAt: new Date()
         });
-    }
+    };
+
 }]);

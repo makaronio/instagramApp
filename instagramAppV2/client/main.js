@@ -65,14 +65,16 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
             if (err) {
                 // handle error
             } else {
-                $scope.photos.forEach(function (obj) {
-                    console.log(obj.description);
+                setTimeout(function() {
+                    $scope.photos.forEach(function (obj) {
+                        console.log(obj.description);
 
-                    if (obj.description === $scope.newPhoto.description) {
-                        obj.imageURL = "/cfs/files/images/" + fileObj._id;
-                    }
-                });
-                $scope.photos.save();
+                        if (obj.description === $scope.newPhoto.description) {
+                            obj.imageURL = "/cfs/files/images/" + fileObj._id;
+                        }
+                    });
+                    $scope.photos.save();
+                }, 1000);
             }
         });
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0930d036-3d32-47a3-9551-ab4204282882" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instagramAppV2/client/main.js" afterPath="$PROJECT_DIR$/instagramAppV2/client/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instagramAppV2/collections/photos.js" afterPath="$PROJECT_DIR$/instagramAppV2/collections/photos.js" />
     </list>
     <ignored path="instagramApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +23,21 @@
     <favorites_list name="instagramApp" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/instagramAppV2/client/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3699187">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding>
+                <element signature="e#149#370#0" expanded="false" />
+                <element signature="e#852#928#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -761,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/instagramAppV2/client/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.92276424">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.3699187">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding>
             <element signature="e#149#370#0" expanded="false" />
             <element signature="e#852#928#0" expanded="false" />

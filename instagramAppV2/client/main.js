@@ -1,7 +1,33 @@
 
 /** App Module **/
 
-var app = angular.module('instagramAppV2', ['angular-meteor']);
+var app = angular.module('instagramAppV2', ['angular-meteor', 'ngRoute']);
+
+//  note: Providers can only be injected into config functions.
+app.config(['$routeProvider', function($routeProvider) {
+
+    $routeProvider.
+        when('/photos', {
+            templateUrl: 'partials/photos.html',
+            controller: 'PhoneListCtrl'
+        }).
+        when('/photos/:photoId', {
+            templateUrl: 'partials/singlePhoto.html',
+            controller: 'PhoneListCtrlV2'
+        }).
+        otherwise({
+            redirectTo: '/photos'
+        });
+}]);
+
+//  todo.notImplemented Add functionality for this controllers
+app.controller('PhoneListCtrl', ['$scope', function($scope) {
+    console.log("");
+}]);
+app.controller('PhoneListCtrlV2', ['$scope', function($scope) {
+    console.log("");
+}]);
+
 
 //  todo.howItWorks
 app.directive('customOnChange', function() {
@@ -23,11 +49,27 @@ app.controller('photoListCtrl', ['$scope', '$meteor', function($scope, $meteor) 
 }]);
 
 app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $meteor) {
+    $scope.headerText = "Photos";
+    $scope.viewType = "table";
+    $scope.viewURL = "views/tableView.html"
 
+    $scope.onChangeView = function(viewType) {
+        if (viewType === "table") {
+            $scope.viewURL = "views/tableView.html"
+        } else {
+            $scope.viewURL = "views/gridView.html"
+        }
+
+    };
+
+}]);
+
+
+
+app.controller('userInfoCtrl', ['$scope', '$meteor', function($scope, $meteor) {
     //  todo.bug: different contexts
     $scope.photos = $meteor.collection(Photos);
 
-    $scope.headerText = "Photos";
     $scope.newPhoto = {
         description: "",
         imageURL: "",
@@ -36,30 +78,13 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
 
 
     $scope.addPhoto = function() {
+        var file = $(".myFileInput")[0].files[0];
 
-        var uri = "https://scontent-frt3-1.cdninstagram.com/hphotos-xfa1/t51.2885-19/10706773_293591184165151_1457379156_a.jpg";
-
-        $scope.photos.push( {
+        $scope.photos.push({
             description: $scope.newPhoto.description,
             imageURL: $scope.newPhoto.imageURL,
             createdAt: new Date()
         });
-
-        /**
-        setTimeout(function() {
-            $scope.photos.forEach(function (obj, i, list) {
-                console.log(obj.description);
-
-                if (obj.description === $scope.newPhoto.description) {
-                    obj.imageURL = uri;
-                }
-            });
-            $scope.photos.save();
-        }, 1000);
-         */
-
-
-        var file = $(".myFileInput")[0].files[0];
 
         Images.insert(file, function (err, fileObj) {
             if (err) {
@@ -77,7 +102,6 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
                 }, 1000);
             }
         });
-
     };
 
     $scope.uploadFile = function(e) {
@@ -85,4 +109,4 @@ app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $me
         $scope.newPhoto.inputFile = files[0];
     }
 
-}]);
+}])

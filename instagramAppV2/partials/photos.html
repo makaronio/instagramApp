@@ -1,0 +1,166 @@
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Mini instagram</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>-->
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Jumbotron Header -->
+    <header class="jumbotron hero-spacer" ng-controller="userInfoCtrl">
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 text-center">
+                <!-- removed img-responsive class -->
+                <img class="img-circle img-center" src="/img/profile.png" alt="" width="150px">
+            </div>
+            <div class="col-md-6 col-sm-6 hero-feature">
+                <div class="col-md-12">
+                    <h3>Some friendly user</h3>
+                    <button type="button" class="btn btn-sm btn-info">Follow</button>
+                    <!-- Trigger the Add photo modal with a button -->
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-success"
+                        data-toggle="modal"
+                        data-target="#add-photo-modal"
+                    >Add photo</button>
+                </div>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <span>
+                        <span><strong>50</strong></span>
+                        <span>posts</span>
+                    </span>
+                    <span>
+                        <span><strong>12</strong></span>
+                        <span>followers</span>
+                    </span>
+                    <span>
+                        <span><strong>10</strong></span>
+                        <span>following</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add photo modal -->
+        <div class="modal fade" id="add-photo-modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add photo</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="line-height: 30px;">Description</label>
+                            <div class="col-sm-5">
+                                <input type="text" ng-model="newPhoto.description" class="form-control input-sm">
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <input type="file"
+                                       name="testPhoto"
+                                       accept="image/*"
+                                       class="myFileInput"
+                                       custom-on-change="uploadFile">
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button ng-click="addPhoto();"
+                                type="button"
+                                class="btn btn-success"
+                                data-dismiss="modal"
+                        >Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <hr>
+
+    <!-- Title -->
+    <div class="row" ng-controller="photoListHeaderCtrl">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <h3>{{headerText}}</h3>
+            </div>
+            <div class="col-md-4">
+              <div class="btn-group" data-toggle="buttons">
+                  <input type="radio" ng-model="viewType" value="table" ng-change='onChangeView(viewType)'>
+                  <label>Table</label>
+                  <input type="radio" ng-model="viewType" value="grid" ng-change='onChangeView(viewType)'>
+                  <label>Grid</label>
+              </div>
+            </div>
+        </div>
+
+        <div ng-include src="viewURL"></div>
+
+    </div>
+    <!-- /.row -->
+
+
+
+    <!-- Page Features -->
+    <div class="row text-center" ng-controller="photoListCtrl">
+        <div class="col-md-3 col-sm-6 hero-feature" ng-repeat="photo in photos">
+            <div class="thumbnail">
+                <a href="#/photos/{{photo._id}}">
+                    <img ng-src="{{photo.imageURL}}">
+                </a>
+                <div class="caption">
+                    <h4>{{photo.description}}</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; 2016</p>
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- /.container -->

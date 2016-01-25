@@ -1,3 +1,15 @@
-<div>
-  grid
+<div ng-repeat="photo in photos">
+    <div class="row">
+        <div class="col-md-7">
+            <a href="#/photos/{{photo._id}}">
+                <img ng-src="{{photo.imageURL}}" width="150px;">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h4>{{photo.description}}</h4>
+        </div>
+    </div>
+
+    <hr>
 </div>
+

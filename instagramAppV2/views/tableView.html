@@ -1,3 +1,10 @@
-<div>
-  tables
+<div class="col-md-3 col-sm-6 hero-feature" ng-repeat="photo in photos">
+    <div class="thumbnail">
+        <a href="#/photos/{{photo._id}}">
+            <img ng-src="{{photo.imageURL}}" width="150px;">
+        </a>
+        <div class="caption">
+            <h4>{{photo.description}}</h4>
+        </div>
+    </div>
 </div>

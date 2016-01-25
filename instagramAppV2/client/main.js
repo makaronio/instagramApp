@@ -3,31 +3,24 @@
 
 var app = angular.module('instagramAppV2', ['angular-meteor', 'ngRoute']);
 
-//  note: Providers can only be injected into config functions.
+
+
+//  todo.note Providers can only be injected into config functions.
 app.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.
         when('/photos', {
             templateUrl: 'partials/photos.html',
-            controller: 'PhoneListCtrl'
+            controller: function () {}
         }).
         when('/photos/:photoId', {
             templateUrl: 'partials/singlePhoto.html',
-            controller: 'PhoneListCtrlV2'
+            controller: 'singlePhoto'
         }).
         otherwise({
             redirectTo: '/photos'
         });
 }]);
-
-//  todo.notImplemented Add functionality for this controllers
-app.controller('PhoneListCtrl', ['$scope', function($scope) {
-    console.log("");
-}]);
-app.controller('PhoneListCtrlV2', ['$scope', function($scope) {
-    console.log("");
-}]);
-
 
 //  todo.howItWorks
 app.directive('customOnChange', function() {
@@ -39,32 +32,6 @@ app.directive('customOnChange', function() {
         }
     };
 });
-
-
-app.controller('photoListCtrl', ['$scope', '$meteor', function($scope, $meteor) {
-
-    //  We are using the $meteor service
-    //  to bind our Photos collection to our $scope.photos variable
-    $scope.photos = $meteor.collection(Photos);
-}]);
-
-app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $meteor) {
-    $scope.headerText = "Photos";
-    $scope.viewType = "table";
-    $scope.viewURL = "views/tableView.html";
-
-    $scope.onChangeView = function(viewType) {
-        if (viewType === "table") {
-            $scope.viewURL = "views/tableView.html"
-        } else {
-            $scope.viewURL = "views/gridView.html"
-        }
-
-    };
-
-}]);
-
-
 
 app.controller('userInfoCtrl', ['$scope', '$meteor', function($scope, $meteor) {
     //  todo.bug: different contexts
@@ -108,5 +75,54 @@ app.controller('userInfoCtrl', ['$scope', '$meteor', function($scope, $meteor) {
         var files = e.target.files;
         $scope.newPhoto.inputFile = files[0];
     }
+}]);
 
-}])
+app.controller('photosListCtrl', ['$scope', '$meteor', function($scope, $meteor) {
+    //  We are using the $meteor service
+    //  to bind our Photos collection to our $scope.photos variable
+    $scope.photos = $meteor.collection(Photos);
+
+    $scope.viewModes = [
+        {
+            name: "table"
+        },
+        {
+            name: "grid"
+        }
+    ];
+
+    //  set default viewMode
+    $scope.currentViewMode = {
+        mode: "table"
+    };
+
+    if (Session.get("viewMode")) {
+        $scope.currentViewMode.mode = Session.get("viewMode");
+    }
+
+    $scope.setFile = function() {
+        if ($scope.currentViewMode.mode === "table") {
+            Session.set("viewMode", "table");
+            return "views/tableView.html";
+        } else if ($scope.currentViewMode.mode === "grid") {
+            Session.set("viewMode", "grid");
+            return "views/gridView.html";
+        }
+    };
+}]);
+
+app.controller('singlePhoto', ['$scope', '$meteor', '$route', function($scope, $meteor, $route) {
+    //  todo.bug: different contexts
+    $scope.photos = $meteor.collection(Photos);
+
+    $scope.photos.forEach(function(obj) {
+        if (obj._id === $route.current.params.photoId) {
+            $scope.photo = obj;
+            return true;
+        }
+    })
+
+}]);
+
+
+

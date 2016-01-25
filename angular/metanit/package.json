@@ -1,0 +1,14 @@
+{
+  "name": "metanit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+      "http-server": "^0.6.1"
+  },
+  "scripts": {
+      "start": "http-server -a 0.0.0.0 -p 8000"
+  }
+}

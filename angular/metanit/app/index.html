@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="makaronApp">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script src="./js/lib/angular.js"></script>
+        <script src="./js/lib/angular-sanitize.js"></script>
+    </head>
+    <body>
+
+        <div ng-controller="phoneListCtrl">
+            <label>Use ng-include</label>
+            <div ng-repeat="mode in modes">
+                <label>
+                    <input type="radio"
+                           name="modes"
+                           ng-model="data.mode"
+                           value="{{mode.value}}">
+                    {{mode.value}}
+                </label>
+            </div>
+
+            <ng-include src="setFile();"></ng-include>
+
+            <hr>
+
+            <label>Use ng-switch</label>
+            <div ng-switch on="data.mode">
+                <div ng-switch-when="Tablets">
+                    Tablets
+                </div>
+                <div ng-switch-when="Phones">
+                    Phones
+                </div>
+                <div ng-switch-default="">
+                    Choose smth for view
+                </div>
+            </div>
+        </div>
+
+
+        <script src="./main.js"></script>
+        <script src="./js/controllers/phonesCtrl.js"></script>
+    </body>
+</html>

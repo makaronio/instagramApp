@@ -51,7 +51,7 @@ app.controller('photoListCtrl', ['$scope', '$meteor', function($scope, $meteor) 
 app.controller('photoListHeaderCtrl', ['$scope', '$meteor', function($scope, $meteor) {
     $scope.headerText = "Photos";
     $scope.viewType = "table";
-    $scope.viewURL = "views/tableView.html"
+    $scope.viewURL = "views/tableView.html";
 
     $scope.onChangeView = function(viewType) {
         if (viewType === "table") {

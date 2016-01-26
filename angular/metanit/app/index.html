@@ -9,7 +9,7 @@
         <script src="./js/lib/angular-sanitize.js"></script>
     </head>
     <body>
-
+        <!-- ng-include example
         <div ng-controller="phoneListCtrl">
             <label>Use ng-include</label>
             <div ng-repeat="mode in modes">
@@ -41,32 +41,78 @@
         </div>
 
         <hr>
+        -->
 
         <div  ng-controller="questionCtrl">
-            <div class="quest" ng-class="questColorClass"
+            <div class="quest"
+                 ng-class="questColorClass"
                  ng-mouseenter="changeClass($event)"
-                 ng-mouseleave="changeClass($event)">
-                <h3>{{question.text}}</h3>
+                 ng-mouseleave="changeClass($event)"
+            >
+                <h3 color-green>{{question.text}}</h3>
                 <p>{{question.author}} </p> <p><i>{{question.date}}</i></p>
             </div>
             <h3>Ответы</h3>
+
+            <label>Filter by {author: 'someName'}</label>
+            <select ng-model="answer.author">
+                <option ng-repeat="answer in question.answers">{{answer.author}}</option>
+            </select>
+
+            <label>Filter by {date: 'someDate'}</label>
+            <select ng-model="answer.date">
+                <option ng-repeat="answer in question.answers">{{answer.date}}</option>
+            </select>
+
+            <label>Filter by input value</label>
+            <input type="text" ng-model="member">
+
+            <hr>
+
+            <!--
+            <div answer-list="question"></div>
+            -->
+
             <div class="answers">
-                <div ng-repeat="answer in question.answers" class="answer">
+                <div ng-repeat="answer in question.answers | orderBy:questionOrderBy | filter:answer | filter: {author: member}" class="answer">
                     <div class="vote">
                         <a class="vote-up" ng-click="voteUp(answer)"></a>
                         <span class="rate">{{answer.rate}}</span>
                         <a class="vote-down" ng-click="voteDown(answer)"></a>
                     </div>
-                    <b>{{answer.text}}</b>
+                    <b>{{answer.text | formatText}}</b>
                     <p>{{answer.author}}</p>
                     <p><i>{{answer.date}}</i></p>
                 </div>
             </div>
+
+        </div>
+
+        <div ng-controller="answerCtrl">
+            <form name="answerForm">
+                <fieldset>
+                    <p>
+                        <label for="answerText">Текст ответа</label>
+                        <input id="answerText" ng-model="answer.text" required placeholder="Введите ответ" />
+                    </p>
+                    <p>
+                        <label for="answerAuthor">Автор ответа</label>
+                        <input id="answerAuthor" ng-model="answer.author" required placeholder="Введите автора" />
+                    </p>
+                    <p>
+                        <label for="answerDate">Дата ответа</label>
+                        <input id="answerDate" ng-model="answer.date" required  ng-pattern="/\d\d/\d\d/\d\d\d\d/" placeholder="Введите дату" />
+                    </p>
+                </fieldset>
+                <button type="submit" ng-click="save(answer, answerForm)">Сохранить</button>
+            </form>
         </div>
 
 
         <script src="./main.js"></script>
         <script src="./js/controllers/phonesCtrl.js"></script>
         <script src="./js/controllers/questionCtrl.js"></script>
+        <script src="./js/controllers/testFiltersCtrl.js"></script>
+        <script src="./js/answerList.js"></script>
     </body>
 </html>

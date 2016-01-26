@@ -1,7 +1,11 @@
 var makaronApp = angular.module("makaronApp");
 
 makaronApp.controller('questionCtrl', function($scope) {
-    $scope.question={
+
+    //  set
+    $scope.questionOrderBy = "-rate";
+
+    $scope.question = {
         text: 'Какой js-фреймворк лучше использовать?',
         author: 'Иван Иванов',
         date: '20/10/2013',
@@ -10,18 +14,30 @@ makaronApp.controller('questionCtrl', function($scope) {
                 text: 'AngularJS!',
                 author: 'Вова Сидоров',
                 date: '20/10/2013',
-                rate:2
+                rate: 2
             },
             {
                 text: 'AngularJS лучше всех',
                 author: 'Олег Кузнецов',
                 date: '20/10/2013',
-                rate:0
+                rate: 0
             },
             {
                 text: 'Я бы использовал knockout',
                 author: 'Неизвестный',
                 date: '21/10/2013',
+                rate: 0
+            },
+            {
+                text: 'Я использовал Backbone',
+                author: 'Неизвестный',
+                date: '21/10/2015',
+                rate: 5
+            },
+            {
+                text: 'фигасе квестшен',
+                author: 'Неизвестный',
+                date: '22/10/2013',
                 rate:0
             }
         ]
@@ -40,5 +56,15 @@ makaronApp.controller('questionCtrl', function($scope) {
         $scope.questColorClass = e.type == "mouseover" ? "questselectedcolor" : "questcolor";
     }
 
+    //  play with directives
+    $scope.valueFromScope = 55;
+});
 
+makaronApp.controller('answerCtrl', function($scope) {
+    $scope.save = function(answer, answerForm) {
+        if(answerForm.$valid){
+            // действия по сохранению
+            alert(answer.author + ", ваш ответ сохранен");
+        }
+    };
 });
